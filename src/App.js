@@ -7,12 +7,13 @@ import './App.css'
 
 function App() {
 
-	const [notes, setNotes] = useState( JSON.parse(window.localStorage.getItem("notes")) || [])
+	const [notes, setNotes] = useLocalStorage("notes", [])
 	const [searchText, setSearchText] = useState("")
 
 	useEffect(() => {
-		window.localStorage.setItem("notes", JSON.stringify(notes))
-	}, [notes])
+		console.log("yo")
+		setNotes(notes)
+	}, [notes, setNotes])
 
 	const addNote = () => {
 		const newNote = {
