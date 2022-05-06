@@ -7,7 +7,7 @@ function useLocalStorage(key, initialValue = "") {
 			return JSON.parse(valueInLocalStorage);
 		}
 
-		return typeof (initialValue === "function") ? initialValue() : initialValue;
+		return initialValue;
 	});
 
 	useEffect(() => {
