@@ -1,5 +1,4 @@
-export default function Note({ deleteNote, note, editNote }) {
-	const {id, title, description} = note
+export default function Note({ id, title, description, deleteNote, editNote }) {
 
 	return (
 		<li className='note'>
