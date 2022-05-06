@@ -1,6 +1,8 @@
 import React from "react";
+import { useAppContext } from '../context';
 
-export default function Header({ addNote, setSearchText }){
+export default function Header(){
+	const {addNote, updateSearchText} = useAppContext()
 	return (
 		<div>
 			<h1 className='app-header__title'>Super Sticky Notes</h1>
@@ -13,7 +15,7 @@ export default function Header({ addNote, setSearchText }){
 					type='text'
 					className='search'
 					placeholder='Type here to search...'
-					onChange={(e) => setSearchText(e.target.value)}
+					onChange={(e) => updateSearchText(e.target.value)}
 				/>
 			</aside>
 		</div>
