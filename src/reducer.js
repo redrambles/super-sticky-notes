@@ -1,9 +1,7 @@
 const reducer = (state, action) => {
-
 	switch (action.type) {
-
-    case "UPDATE_SEARCH_TEXT":
-      return {...state, searchText: action.payload}
+		case "UPDATE_SEARCH_TEXT":
+			return { ...state, searchText: action.payload };
 
 		case "DELETE_NOTE":
 			const updatedNotes = state.notes.filter((note) => note.id !== action.payload);

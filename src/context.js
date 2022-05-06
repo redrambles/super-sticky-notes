@@ -1,14 +1,14 @@
 import React, { useContext, useReducer, useEffect } from "react";
 import reducer from "./reducer";
 
-const AppContext = React.createContext();
+const NotesContext = React.createContext();
 
 const initialState = {
 	notes: JSON.parse(window.localStorage.getItem("notes")) || [],
 	searchText: "",
 };
 
-export const AppProvider = ({ children }) => {
+export const NotesProvider = ({ children }) => {
 	const [state, dispatch] = useReducer(reducer, initialState);
 
 	useEffect(() => {
@@ -32,7 +32,7 @@ export const AppProvider = ({ children }) => {
 	};
 
 	return (
-		<AppContext.Provider
+		<NotesContext.Provider
 			value={{
 				...state,
 				addNote,
@@ -42,10 +42,10 @@ export const AppProvider = ({ children }) => {
 			}}
 		>
 			{children}
-		</AppContext.Provider>
+		</NotesContext.Provider>
 	);
 };
 
-export const useAppContext = () => {
-	return useContext(AppContext);
+export const useNotesContext = () => {
+	return useContext(NotesContext);
 };

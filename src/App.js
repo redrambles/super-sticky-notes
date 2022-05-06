@@ -1,12 +1,12 @@
 import Header from './components/Header'
 import Note from './components/Note';
-import { useAppContext } from './context';
+import { useNotesContext } from './context';
 import './App.css'
 
 
 function App() {
 
-	const {notes, searchText, addNote, editNote, deleteNote} = useAppContext();
+	const {notes, searchText, addNote, editNote, deleteNote} = useNotesContext();
 
 	return (
 		<div className='App'>
@@ -18,7 +18,7 @@ function App() {
 				)).map(note => (
 					<Note
 						key={note.id}
-						note={note}
+						{...note}
 						deleteNote={deleteNote}
 						editNote={editNote}
 					/>

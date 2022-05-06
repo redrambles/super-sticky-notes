@@ -1,8 +1,8 @@
 import React from "react";
-import { useAppContext } from '../context';
+import { useNotesContext } from '../context';
 
 export default function Header(){
-	const {addNote, updateSearchText} = useAppContext()
+	const {addNote, updateSearchText} = useNotesContext()
 	return (
 		<div>
 			<h1 className='app-header__title'>Super Sticky Notes</h1>

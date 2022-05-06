@@ -2,14 +2,14 @@ import React from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App";
-import { AppProvider } from "./context";
+import { NotesProvider } from "./context";
 
 // New React 18 way of doing this
 const root = createRoot(document.getElementById("root"));
 root.render(
-    <AppProvider>
+    <NotesProvider>
         <App tab='home' />
-    </AppProvider>
+    </NotesProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function
