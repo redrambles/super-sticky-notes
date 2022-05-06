@@ -1,22 +1,22 @@
-import React from "react";
+export default function Note({ deleteNote, note, editNote }) {
+	const {id, title, description} = note
 
-export default function Note({ note, editNote, deleteNote }) {
 	return (
 		<li className='note'>
 			<input
 				className='note__title'
 				type='text'
 				placeholder='Title'
-				value={note.title}
-				onChange={(e) => editNote(note.id, "title", e.target.value)}
+				value={title}
+				onChange={(e) => editNote(id, "title", e.target.value )}
 			/>
 			<textarea
 				className='note__description'
 				placeholder='Description...'
-				value={note.description}
-				onChange={(e) => editNote(note.id, "description", e.target.value)}
+				value={description}
+				onChange={(e) => editNote(id, "description", e.target.value )}
 			/>
-			<span className='note__delete' onClick={() => deleteNote(note.id)}>
+			<span className='note__delete' onClick={() => deleteNote(id)}>
 				X
 			</span>
 		</li>

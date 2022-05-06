@@ -1,93 +1,69 @@
-import React, { useState, useEffect } from "react";
-import "./App.css";
-import Header from "./components/Header";
-import Note from "./components/Note";
-import useLocalStorage from "./hooks/useLocalStorage";
+import { useState, useEffect } from 'react';
+import Header from './components/Header'
+import Note from './components/Note';
+import useLocalStorage from './hooks/useLocalStorage';
+import './App.css'
+
 
 function App() {
-	const [notes, setNotes] = useLocalStorage("notes", [
-		{
-			id: 0,
-			title: "eat",
-			description: "reese peanut butter cups",
-			doesMatchSearch: true,
-		},
-		{
-			id: 1,
-			title: "sleep",
-			description: "eight hours",
-			doesMatchSearch: true,
-		},
-		{
-			id: 2,
-			title: "code",
-			description: "build an awesome ui",
-			doesMatchSearch: true,
-		},
-	]);
 
-	const [searchText, setSearchText] = useState("");
+	const [notes, setNotes] = useState( JSON.parse(window.localStorage.getItem("notes")) || [])
+	const [searchText, setSearchText] = useState("")
 
 	useEffect(() => {
-		const updatedNotes = notes.map((note) => {
-			if (note.title.toLowerCase().includes(searchText) || note.description.toLowerCase().includes(searchText)) {
-				return { ...note, doesMatchSearch: true };
-			} else {
-				return { ...note, doesMatchSearch: false };
-			}
-		});
-		setNotes(updatedNotes);
-	}, [searchText]);
-
-	useEffect(() => {
-		localStorage.setItem("notes", JSON.stringify(notes));
-	}, [notes]);
+		window.localStorage.setItem("notes", JSON.stringify(notes))
+	}, [notes])
 
 	const addNote = () => {
-		let newNote = {
+		const newNote = {
 			id: Date.now(),
 			title: "",
-			description: "",
-			doesMatchSearch: true,
-		};
-		setNotes([newNote, ...notes]);
-	};
+			description: ""
+		}
+		setNotes( prevNotes => [newNote, ...prevNotes])
+	}
 
-	const editNote = (noteId, field, text) => {
-		const newNotes = notes.map((note) => {
-			if (note.id !== noteId) {
-				return note;
+	const editNote = (id, field, text) => {
+		const updatedNotes = notes.map(note => {
+			if (note.id !== id ) {
+				return note
 			} else {
-				if (field === "title") {
-					return { ...note, title: text };
-				} else if (field === "description") {
-					return { ...note, description: text };
+				if (field === "title"){
+					return {...note, title: text}
 				} else {
-					console.log("Something weird is going down in the note editing feature");
-					return note;
+					return {...note, description: text}
 				}
 			}
-		});
-		setNotes(newNotes);
-	};
+		})
 
-	const deleteNote = (deletedNoteId) => {
-		const updatedNotes = notes.filter((note) => note.id !== deletedNoteId);
+		setNotes(updatedNotes)
+	}
+
+	const deleteNote = (id) => {
+		const updatedNotes = notes.filter(note => note.id !== id)
 		setNotes(updatedNotes);
-	};
+	}
 
 	return (
 		<div className='App'>
-			<Header newNote={addNote} setSearchText={setSearchText} />
-			<ul className='notes-list'>
-				{notes
-					.filter((note) => note.doesMatchSearch)
-					.map((note) => (
-						<Note key={note.id} note={note} editNote={editNote} deleteNote={deleteNote} />
-					))}
+			<Header addNote={addNote} setSearchText={setSearchText} />
+			<ul className="notes-list">
+				{notes.filter(note => (
+					note.title.toLowerCase().includes(searchText.toLowerCase()) ||
+					note.description.toLowerCase().includes(searchText.toLowerCase())
+				)).map(note => (
+					<Note
+						key={note.id}
+						note={note}
+						deleteNote={deleteNote}
+						editNote={editNote}
+					/>
+				))}
 			</ul>
 		</div>
 	);
 }
 
 export default App;
+
+
