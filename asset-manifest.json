@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/Super-Sticky-Notes/static/css/main.d657b170.css",
-    "main.js": "/Super-Sticky-Notes/static/js/main.c35fc0bd.js",
+    "main.js": "/Super-Sticky-Notes/static/js/main.cc5f8214.js",
     "index.html": "/Super-Sticky-Notes/index.html",
     "main.d657b170.css.map": "/Super-Sticky-Notes/static/css/main.d657b170.css.map",
-    "main.c35fc0bd.js.map": "/Super-Sticky-Notes/static/js/main.c35fc0bd.js.map"
+    "main.cc5f8214.js.map": "/Super-Sticky-Notes/static/js/main.cc5f8214.js.map"
   },
   "entrypoints": [
     "static/css/main.d657b170.css",
-    "static/js/main.c35fc0bd.js"
+    "static/js/main.cc5f8214.js"
   ]
 }
